@@ -45,6 +45,7 @@ describe("isSunk function tests", () => {
     shipTest.hit();
     expect(shipTest.isSunk()).toBe(true);
   });
+
   test("Return false if ship is hit but not sunk", () => {
     const shipTest = ship("destroyer");
     shipTest.hit();
