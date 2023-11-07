@@ -2,14 +2,18 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
-    'jest/globals': true,
+    "jest/globals": true,
   },
-  extends: ["airbnb-base", "prettier", "plugin:jest/recommended", 'plugin:prettier/recommended'],
+  extends: [
+    "airbnb-base",
+    "prettier",
+    "plugin:jest/recommended",
+    "plugin:prettier/recommended",
+  ],
   overrides: [
     {
       env: {
         node: true,
-
       },
       files: [".eslintrc.{js,cjs}"],
       parserOptions: {
@@ -22,7 +26,8 @@ module.exports = {
     sourceType: "module",
   },
   rules: {
-   "prettier/prettier": 'error',
+    "prettier/prettier": "error",
+    "no-plusplus": 0,
   },
-  plugins: ["jest",'prettier'],
+  plugins: ["jest", "prettier"],
 };
