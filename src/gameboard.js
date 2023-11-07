@@ -1,6 +1,6 @@
-import ship, { SHIP_LENGTHS } from './ship';
+import ship, { SHIP_LENGTHS } from "./ship";
 
-export const Gameboard = () => {
+const Gameboard = () => {
   const board = [];
   const ships = [];
   const BOARD_SIZE = 10;
@@ -21,8 +21,10 @@ export const Gameboard = () => {
   createBoard();
 
   // Place a ship on the gameboard
-  const placeShip = (x, y, shipLength, direction) => {
-    const newShip = ship(shipLength);
+  const placeShip = (x, y, shipType, direction) => {
+    const shipLength = SHIP_LENGTHS[shipType];
+
+    const newShip = ship(shipType);
     ships.push(newShip);
 
     // Calculate the coordinates for the ship based on its length and direction
@@ -30,19 +32,19 @@ export const Gameboard = () => {
       let currentX = x;
       let currentY = y;
 
-      if (direction === 'horizontal') {
+      if (direction === "horizontal") {
         currentY += i;
       } else {
         currentX += i;
       }
       if (currentX >= BOARD_SIZE || currentY >= BOARD_SIZE) {
         throw new Error(
-          'Ship placement is outside of the gameboard boundaries.',
+          "Ship placement is outside of the gameboard boundaries.",
         );
       }
 
       if (board[currentX][currentY]) {
-        throw new Error('There is already a ship at that location.');
+        throw new Error("There is already a ship at that location.");
       }
 
       // Assign the ship to the board cell
@@ -50,12 +52,12 @@ export const Gameboard = () => {
     }
   };
 
-  const hasShip = (x, y) => {
+  const getShipAt = (x, y) => {
     if (board[x] === undefined || board[x][y] === undefined) {
-      return false;
+      return null;
     }
-    return board[x][y] !== null;
-  }
+    return board[x][y];
+  };
 
   const receiveAttack = (x, y) => {
     const target = board[x][y];
@@ -73,10 +75,12 @@ export const Gameboard = () => {
 
   return {
     placeShip,
-    hasShip,
+    getShipAt,
     receiveAttack,
     areAllShipsSunk,
     getMissedAttacks,
     getShots: () => shots,
   };
 };
+
+export default Gameboard;

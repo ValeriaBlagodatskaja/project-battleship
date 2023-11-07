@@ -1,10 +1,11 @@
-//length object
-const SHIP_LENGTHS = {
+// length object
+export const SHIP_LENGTHS = {
   carrier: 5,
   battleship: 4,
   cruiser: 3,
   submarine: 3,
   destroyer: 2,
+  scout: 1,
 };
 
 const ship = (type) => {
@@ -14,7 +15,7 @@ const ship = (type) => {
 
   let hits = 0;
 
-  //hit
+  // hit
   const hit = () => {
     if (hits < length) {
       // You can hit a ship only if it hasn't been sunk
@@ -23,7 +24,7 @@ const ship = (type) => {
   };
 
   const getHitNum = () => hits;
-  //isSunk
+  // isSunk
   const isSunk = () => {
     if (hits >= length) {
       return true;
@@ -36,7 +37,15 @@ const ship = (type) => {
     direction = direction === "horizontal" ? "vertical" : "horizontal";
   };
 
-  return { id, length, hit, getHitNum, isSunk, getDirection, changeDirection };
+  return {
+    id,
+    length,
+    hit,
+    getHitNum,
+    isSunk,
+    getDirection,
+    changeDirection,
+  };
 };
 
 export default ship;
