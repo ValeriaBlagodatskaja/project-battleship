@@ -31,13 +31,14 @@ test("Player can attack enemy board if it's player's turn", () => {
   expect(attackedShip.getHitNum()).toBe(1);
 });
 
-test("Player attacking ends turn and starts enemy turn", () => {
+test("Player attacking ends turn and starts enemy turn, player moves are recorded", () => {
   const enemyBoard = Gameboard();
   const player = new Player("Lucas");
   const enemyPlayer = new Player("Georg");
   enemyBoard.placeShip(2, 0, "destroyer", "vertical");
   player.startTurn();
   player.attack(2, 0, enemyPlayer, enemyBoard);
+  expect(player.getMoves().length).toBe(1);
   expect(player.checkTurn()).toBe(false);
   expect(enemyPlayer.checkTurn()).toBe(true);
 });

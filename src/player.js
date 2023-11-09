@@ -51,6 +51,10 @@ class Player {
     this.moves.push({ x, y });
   }
 
+  getMoves() {
+    return this.moves;
+  }
+
   isMoveLegal(x, y) {
     const withinBounds = x >= 0 && y >= 0 && x < 10 && y < 10;
     const notPreviouslyAttacked = !this.moves.some(
