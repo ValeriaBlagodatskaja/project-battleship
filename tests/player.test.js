@@ -14,31 +14,31 @@ test("Player can change name", () => {
 
 test("Player ending turn starts enemy turn", () => {
   const player = new Player("Lucas");
-  const enemyPlayer = new Player("Georg");
-  player.endTurn(enemyPlayer);
+  const ai = new Player("Georg");
+  player.endTurn(ai);
   expect(player.checkTurn()).toBe(false);
-  expect(enemyPlayer.checkTurn()).toBe(true);
+  expect(ai.checkTurn()).toBe(true);
 });
 
 test("Player can attack enemy board if it's player's turn", () => {
-  const enemyBoard = Gameboard();
+  const aiBoard = Gameboard();
   const player = new Player("Lucas");
-  const enemyPlayer = new Player("Georg");
-  enemyBoard.placeShip(2, 0, "destroyer", "vertical");
+  const ai = new Player("Georg");
+  aiBoard.placeShip(2, 0, "destroyer", "vertical");
   player.startTurn();
-  player.attack(2, 0, enemyPlayer, enemyBoard);
-  const attackedShip = enemyBoard.getShipAt(2, 0);
+  player.attack(2, 0, ai, aiBoard);
+  const attackedShip = aiBoard.getShipAt(2, 0);
   expect(attackedShip.getHitNum()).toBe(1);
 });
 
 test("Player attacking ends turn and starts enemy turn, player moves are recorded", () => {
-  const enemyBoard = Gameboard();
+  const aiBoard = Gameboard();
   const player = new Player("Lucas");
-  const enemyPlayer = new Player("Georg");
-  enemyBoard.placeShip(2, 0, "destroyer", "vertical");
+  const ai = new Player("Georg");
+  aiBoard.placeShip(2, 0, "destroyer", "vertical");
   player.startTurn();
-  player.attack(2, 0, enemyPlayer, enemyBoard);
+  player.attack(2, 0, ai, aiBoard);
   expect(player.getMoves().length).toBe(1);
   expect(player.checkTurn()).toBe(false);
-  expect(enemyPlayer.checkTurn()).toBe(true);
+  expect(ai.checkTurn()).toBe(true);
 });

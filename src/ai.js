@@ -1,5 +1,9 @@
 import Player from "./player";
 
+function getRandomNumber(max) {
+  return Math.floor(Math.random() * max);
+}
+
 class AI extends Player {
   constructor(name, gameboard) {
     super(name, gameboard);
@@ -7,11 +11,16 @@ class AI extends Player {
     this.attackArray = [];
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getRandomCoordinate() {
     const max = 10;
-    const x = Math.floor(Math.random() * max);
-    const y = Math.floor(Math.random() * max);
+    const x = getRandomNumber(max);
+    const y = getRandomNumber(max);
     return { x, y };
+  }
+
+  recordAttack(x, y) {
+    this.attackArray.push({ x, y });
   }
 
   randomAttack(player, playerBoard) {
@@ -24,11 +33,7 @@ class AI extends Player {
     } while (!this.isMoveLegal(x, y));
     this.attack(x, y, player, playerBoard);
     this.recordAttack(x, y);
-    this.endTurn();
-  }
-
-  recordAttack(x, y) {
-    this.attackArray.push({ x, y });
+    this.endTurn(player);
   }
 
   getAttackArray() {

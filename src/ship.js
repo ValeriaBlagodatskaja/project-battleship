@@ -8,9 +8,9 @@ export const SHIP_LENGTHS = {
   scout: 1,
 };
 
-const ship = (type) => {
-  const id = type;
-  const length = SHIP_LENGTHS[type];
+const ship = (shipType) => {
+  const id = shipType;
+  const length = SHIP_LENGTHS[shipType];
   let direction = "horizontal";
 
   let hits = 0;
