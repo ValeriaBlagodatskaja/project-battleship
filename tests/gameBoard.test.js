@@ -11,31 +11,31 @@ test("Place a two-square horizontal ship at a specified location on the gameboar
   const game = Gameboard();
   game.placeShip(0, 0, "destroyer", "horizontal");
   expect(game.getShipAt(0, 0)).not.toBeNull();
-  expect(game.getShipAt(0, 1)).not.toBeNull();
-  expect(game.getShipAt(0, 2)).toBeNull();
+  expect(game.getShipAt(1, 0)).not.toBeNull();
+  expect(game.getShipAt(2, 0)).toBeNull();
 });
 
 test("Place a two-sqare vertical ship at a specified location on the gameboard", () => {
   const game = Gameboard();
-  game.placeShip(2, 0, "destroyer", "vertical");
-  expect(game.getShipAt(2, 0)).not.toBeNull();
-  expect(game.getShipAt(3, 0)).not.toBeNull();
-  expect(game.getShipAt(1, 0)).toBeNull();
+  game.placeShip(0, 2, "destroyer", "vertical");
+  expect(game.getShipAt(0, 2)).not.toBeNull();
+  expect(game.getShipAt(0, 3)).not.toBeNull();
+  expect(game.getShipAt(0, 1)).toBeNull();
 });
 
 test("GameBoard won't place ship if the space is occupied", () => {
   const game = Gameboard();
-  game.placeShip(2, 0, "destroyer", "vertical");
+  game.placeShip(0, 2, "destroyer", "vertical");
   expect(() => {
-    game.placeShip(3, 0, "submarine", "horizontal");
+    game.placeShip(0, 3, "submarine", "horizontal");
   }).toThrow("There is already a ship at that location.");
 });
 
 test("Gameboard can receive attack when there is a ship", () => {
   const game = Gameboard();
   game.placeShip(0, 0, "destroyer", "horizontal");
-  game.receiveAttack(0, 1);
-  const shipAtPosition = game.getShipAt(0, 1);
+  game.receiveAttack(1, 0);
+  const shipAtPosition = game.getShipAt(1, 0);
   expect(shipAtPosition.getHitNum()).toBe(1);
 });
 
@@ -50,9 +50,9 @@ test("Gameboard keeps track of missed attacks", () => {
 test("Gameboard can check if every ship is sunk", () => {
   const game = Gameboard();
   game.placeShip(0, 0, "scout", "horizontal");
-  game.placeShip(0, 3, "destroyer", "horizontal");
+  game.placeShip(3, 0, "destroyer", "horizontal");
   game.receiveAttack(0, 0);
-  game.receiveAttack(0, 3);
-  game.receiveAttack(0, 4);
+  game.receiveAttack(3, 0);
+  game.receiveAttack(4, 0);
   expect(game.areAllShipsSunk()).toBe(true);
 });

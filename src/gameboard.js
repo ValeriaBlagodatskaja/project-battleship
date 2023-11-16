@@ -20,6 +20,10 @@ const Gameboard = () => {
   };
   createBoard();
 
+  const getBoard = () => {
+    return board.map((row) => [...row]);
+  };
+
   // Place a ship on the gameboard
   const placeShip = (x, y, shipType, direction) => {
     const shipLength = SHIP_LENGTHS[shipType];
@@ -29,26 +33,26 @@ const Gameboard = () => {
 
     // Calculate the coordinates for the ship based on its length and direction
     for (let i = 0; i < shipLength; i++) {
-      let currentX = x;
-      let currentY = y;
+      let startX = x;
+      let startY = y;
 
       if (direction === "horizontal") {
-        currentY += i;
+        startX += i;
       } else {
-        currentX += i;
+        startY += i;
       }
-      if (currentX >= BOARD_SIZE || currentY >= BOARD_SIZE) {
+      if (startX >= BOARD_SIZE || startY >= BOARD_SIZE) {
         throw new Error(
           "Ship placement is outside of the gameboard boundaries.",
         );
       }
 
-      if (board[currentX][currentY]) {
+      if (board[startX][startY]) {
         throw new Error("There is already a ship at that location.");
       }
 
       // Assign the ship to the board cell
-      board[currentX][currentY] = newShip;
+      board[startX][startY] = newShip;
     }
   };
 
@@ -65,13 +69,19 @@ const Gameboard = () => {
       target.hit();
       // Record the hit
       shots.hits.push({ x, y });
-    } else {
-      shots.misses.push({ x, y });
+      if (target.isSunk()) {
+        return { hit: true, sunk: true };
+      }
+      return { hit: true, sunk: false };
     }
+    shots.misses.push({ x, y });
+    return { hit: false, sunk: false };
   };
 
+  // eslint-disable-next-line no-shadow
   const areAllShipsSunk = () => ships.every((ship) => ship.isSunk());
   const getMissedAttacks = () => shots.misses;
+  const getShots = () => shots;
 
   return {
     placeShip,
@@ -79,7 +89,8 @@ const Gameboard = () => {
     receiveAttack,
     areAllShipsSunk,
     getMissedAttacks,
-    getShots: () => shots,
+    getBoard,
+    getShots,
   };
 };
 
