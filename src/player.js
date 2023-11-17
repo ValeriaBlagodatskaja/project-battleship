@@ -13,8 +13,8 @@ class Player {
     return this.name;
   }
 
-  setName(name) {
-    this.name = name;
+  setName(newName) {
+    this.name = newName;
   }
 
   endTurn(enemyPlayer) {
@@ -39,10 +39,17 @@ class Player {
       return { success: false, message: "It's not your turn" };
     }
     if (this.isMoveLegal(x, y)) {
-      enemyBoard.receiveAttack(x, y);
+      const attackResult = enemyBoard.receiveAttack(x, y);
       this.recordMove(x, y);
       this.endTurn(enemyPlayer);
-      return { success: true, message: "Attack made" };
+
+      if (attackResult.hit) {
+        if (attackResult.sunk) {
+          return { success: true, message: "Ship sunk!" };
+        }
+        return { success: true, message: "Ship hit!" };
+      }
+      return { success: true, message: "Missed!" };
     }
     return { success: false, message: "You can't attack same spot twice" };
   }
