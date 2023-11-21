@@ -1,6 +1,9 @@
+import "./style.css";
 /* eslint-disable no-console */
 function renderGameboard(gameboard, boardContainerId) {
   const boardData = gameboard.getBoard();
+  const shots = gameboard.getShots();
+  const { hits, misses } = shots;
   const boardContainer = document.getElementById(boardContainerId);
 
   // Clear previous content
@@ -15,20 +18,22 @@ function renderGameboard(gameboard, boardContainerId) {
       const cellDiv = document.createElement("div");
       cellDiv.className = "board-cell";
 
-      // Check if the cell has a ship
-      if (cell && cell.id) {
+      if (cell && typeof cell === "object" && cell.id) {
         cellDiv.classList.add("ship");
       }
-      // Check if the cell is hit
-      else if (cell && cell.isHit) {
-        cellDiv.classList.add("hit");
-      }
-      // Check if the cell is a miss
-      else if (cell === "miss") {
-        cellDiv.classList.add("miss");
-      }
-
       // Set attributes for identification
+      hits.forEach(({ x, y }) => {
+        if (x === rowIndex && y === cellIndex) {
+          cellDiv.classList.add("hit");
+        }
+      });
+
+      misses.forEach(({ x, y }) => {
+        if (x === rowIndex && y === cellIndex) {
+          cellDiv.classList.add("miss");
+        }
+      });
+
       cellDiv.setAttribute("data-row", rowIndex);
       cellDiv.setAttribute("data-column", cellIndex);
 
@@ -51,19 +56,24 @@ function setupEventListeners(playerBoard, aiBoard, player, ai) {
       // Perform an attack or other game logic based on the clicked cell
       console.log("Attacking on board: ", aiBoard);
       const attackResult = player.attack(row, column, ai, aiBoard);
+
       if (attackResult.success) {
-        console.log(attackResult.message);
+        if (attackResult.hit) {
+          console.log(attackResult.message);
+        } else {
+          console.log("Missed");
+        }
 
         if (!player.turn && ai.turn) {
           setTimeout(() => {
             ai.randomAttack(player, playerBoard);
-            console.log("ai makes move");
             renderGameboard(playerBoard, "playerBoard");
             renderGameboard(aiBoard, "aiBoard");
           }, 500);
         }
-      } else {
-        console.log("Attack failed:", attackResult.message);
+
+        renderGameboard(playerBoard, "playerBoard");
+        renderGameboard(aiBoard, "aiBoard");
       }
     }
   });

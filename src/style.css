@@ -1,0 +1,38 @@
+#playerBoard,
+#aiBoard {
+  display: inline-block;
+  margin: 20px;
+}
+
+/* Individual Rows */
+.board-row {
+  display: flex;
+  background-color: red;
+  width: 100%;
+}
+
+/* Individual Cells */
+.board-cell {
+  background-color: blue;
+
+  width: 30px; /* Cell width */
+  height: 30px; /* Cell height */
+  border: 1px solid #333; /* Cell border */
+  box-sizing: border-box;
+  cursor: pointer; /* Change cursor on hover */
+}
+
+/* Cell when it has a ship */
+.board-cell.ship {
+  background-color: green;
+}
+
+/* Cell when it is hit */
+.board-cell.hit {
+  background-color: red;
+}
+
+/* Cell when attack misses */
+.board-cell.miss {
+  background-color: grey;
+}

@@ -67,6 +67,7 @@ const Gameboard = () => {
     const target = board[x][y];
     if (target) {
       target.hit();
+
       // Record the hit
       shots.hits.push({ x, y });
       if (target.isSunk()) {
@@ -74,6 +75,7 @@ const Gameboard = () => {
       }
       return { hit: true, sunk: false };
     }
+
     shots.misses.push({ x, y });
     return { hit: false, sunk: false };
   };
