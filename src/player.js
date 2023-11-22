@@ -45,11 +45,16 @@ class Player {
 
       if (attackResult.hit) {
         if (attackResult.sunk) {
-          return { success: true, message: "Ship sunk!" };
+          return {
+            success: true,
+            hit: true,
+            sunk: true,
+            message: "Ship sunk!",
+          };
         }
-        return { success: true, message: "Ship hit!" };
+        return { success: true, hit: true, sunk: false, message: "Ship hit!" };
       }
-      return { success: true, message: "Missed!" };
+      return { success: true, hit: false, sunk: false, message: "Missed!" };
     }
     return { success: false, message: "You can't attack same spot twice" };
   }

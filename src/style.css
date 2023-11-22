@@ -1,25 +1,43 @@
-#playerBoard,
-#aiBoard {
-  display: inline-block;
-  margin: 20px;
+* {
+  box-sizing: border-box;
 }
 
-/* Individual Rows */
+body {
+  max-height: 100vh;
+}
+
+.boards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 20px;
+  padding-top: 56px;
+}
+
+.playerBoard-container,
+.aiBoard-container {
+  text-align: center;
+}
+
+.playerBoard-name,
+.aiBoard-name {
+  font-size: 28px;
+}
+
 .board-row {
   display: flex;
-  background-color: red;
   width: 100%;
 }
 
-/* Individual Cells */
 .board-cell {
   background-color: blue;
 
-  width: 30px; /* Cell width */
-  height: 30px; /* Cell height */
-  border: 1px solid #333; /* Cell border */
+  width: 40px;
+  height: 40px;
+  border: 1px solid #333;
   box-sizing: border-box;
-  cursor: pointer; /* Change cursor on hover */
+  cursor: pointer;
 }
 
 /* Cell when it has a ship */
@@ -35,4 +53,20 @@
 /* Cell when attack misses */
 .board-cell.miss {
   background-color: grey;
+}
+
+.message-container {
+  background-color: black;
+  width: 90%;
+  border: 2px solid black;
+  margin: 20px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message {
+  color: white;
+  font-size: 32px;
+  padding: 24px 12px;
 }

@@ -44,6 +44,16 @@ function renderGameboard(gameboard, boardContainerId) {
   });
 }
 
+function updateMessage(text) {
+  console.log("Updating message to:", text); // Debugging line
+  const messageElement = document.getElementById("message");
+  if (messageElement) {
+    messageElement.textContent = text;
+  } else {
+    console.error("Message element not found"); // Debugging line
+  }
+}
+
 function setupEventListeners(playerBoard, aiBoard, player, ai) {
   const aiBoardContainer = document.getElementById("aiBoard");
   aiBoardContainer.addEventListener("click", (event) => {
@@ -59,17 +69,20 @@ function setupEventListeners(playerBoard, aiBoard, player, ai) {
 
       if (attackResult.success) {
         if (attackResult.hit) {
-          console.log(attackResult.message);
+          updateMessage(attackResult.message);
         } else {
-          console.log("Missed");
+          updateMessage(attackResult.message);
         }
 
         if (!player.turn && ai.turn) {
           setTimeout(() => {
-            ai.randomAttack(player, playerBoard);
+            const aiAttackResult = ai.randomAttack(player, playerBoard);
+            if (aiAttackResult.success) {
+              updateMessage(aiAttackResult.message);
+            }
             renderGameboard(playerBoard, "playerBoard");
             renderGameboard(aiBoard, "aiBoard");
-          }, 500);
+          }, 1000);
         }
 
         renderGameboard(playerBoard, "playerBoard");

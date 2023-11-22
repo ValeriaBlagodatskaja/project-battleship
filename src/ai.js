@@ -36,6 +36,17 @@ class AI extends Player {
 
     this.recordAttack(x, y);
     this.endTurn(player);
+
+    if (attackResult.hit) {
+      attackResult.message = attackResult.sunk
+        ? "AI sunk your ship!"
+        : "AI hit your ship!";
+    } else {
+      attackResult.message = "AI missed!";
+    }
+
+    // eslint-disable-next-line consistent-return
+    return attackResult;
   }
 
   getAttackArray() {
