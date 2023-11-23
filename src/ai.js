@@ -37,15 +37,24 @@ class AI extends Player {
     this.recordAttack(x, y);
     this.endTurn(player);
 
-    if (attackResult.hit) {
+    const gameOver = playerBoard.areAllShipsSunk();
+
+    // Update the message based on attack result
+    if (gameOver) {
+      // If all ships are sunk, the game is over
+      attackResult.message = "Game over! AI won!";
+    } else if (attackResult.hit) {
+      // If a ship is hit, but not all are sunk
       attackResult.message = attackResult.sunk
         ? "AI sunk your ship!"
         : "AI hit your ship!";
     } else {
+      // If the attack missed
       attackResult.message = "AI missed!";
     }
 
-    // eslint-disable-next-line consistent-return
+    attackResult.allSunk = gameOver;
+
     return attackResult;
   }
 

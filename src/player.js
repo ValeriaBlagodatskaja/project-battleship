@@ -43,13 +43,19 @@ class Player {
       this.recordMove(x, y);
       this.endTurn(enemyPlayer);
 
+      let gameOver = false;
+      if (enemyBoard.areAllShipsSunk()) {
+        gameOver = true;
+      }
+
       if (attackResult.hit) {
         if (attackResult.sunk) {
           return {
             success: true,
             hit: true,
             sunk: true,
-            message: "Ship sunk!",
+            allSunk: gameOver,
+            message: gameOver ? "Game over! You won!" : "Ship sunk!",
           };
         }
         return { success: true, hit: true, sunk: false, message: "Ship hit!" };

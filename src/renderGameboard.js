@@ -1,4 +1,6 @@
 import "./style.css";
+import startGame from "./startGame";
+
 /* eslint-disable no-console */
 function renderGameboard(gameboard, boardContainerId) {
   const boardData = gameboard.getBoard();
@@ -54,8 +56,19 @@ function updateMessage(text) {
   }
 }
 
+const restartBtn = document.getElementById("restartBtn");
+
+function resetGame() {
+  restartBtn.style.display = "none";
+  updateMessage("Launch an attack!");
+  startGame();
+}
+
+restartBtn.addEventListener("click", resetGame);
+
 function setupEventListeners(playerBoard, aiBoard, player, ai) {
   const aiBoardContainer = document.getElementById("aiBoard");
+
   aiBoardContainer.addEventListener("click", (event) => {
     console.log("Clicked on AI board");
     const cell = event.target;
@@ -64,12 +77,19 @@ function setupEventListeners(playerBoard, aiBoard, player, ai) {
       const row = parseInt(cell.getAttribute("data-row"), 10);
       const column = parseInt(cell.getAttribute("data-column"), 10);
       // Perform an attack or other game logic based on the clicked cell
-      console.log("Attacking on board: ", aiBoard);
       const attackResult = player.attack(row, column, ai, aiBoard);
 
       if (attackResult.success) {
         if (attackResult.hit) {
           updateMessage(attackResult.message);
+          renderGameboard(playerBoard, "playerBoard");
+          renderGameboard(aiBoard, "aiBoard");
+          if (attackResult.allSunk) {
+            updateMessage(attackResult.message);
+
+            restartBtn.style.display = "block";
+            return;
+          }
         } else {
           updateMessage(attackResult.message);
         }
@@ -79,6 +99,10 @@ function setupEventListeners(playerBoard, aiBoard, player, ai) {
             const aiAttackResult = ai.randomAttack(player, playerBoard);
             if (aiAttackResult.success) {
               updateMessage(aiAttackResult.message);
+              if (aiAttackResult.allSunk) {
+                updateMessage(aiAttackResult.message);
+                return;
+              }
             }
             renderGameboard(playerBoard, "playerBoard");
             renderGameboard(aiBoard, "aiBoard");
