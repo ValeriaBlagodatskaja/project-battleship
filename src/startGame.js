@@ -4,7 +4,9 @@ import Player from "./player";
 import AI from "./ai";
 import "./style.css";
 
-import { renderGameboard, setupEventListeners } from "./renderGameboard";
+import { renderGameboard, updateMessage } from "./renderGameboard";
+
+import setupEventListeners from "./eventListeners";
 
 export default function startGame() {
   const playerBoard = Gameboard();
@@ -26,3 +28,13 @@ export default function startGame() {
   // Setup event listeners for the gameboard
   setupEventListeners(playerBoard, aiBoard, player, ai);
 }
+
+const restartBtn = document.getElementById("restartBtn");
+
+export function resetGame() {
+  restartBtn.style.display = "none";
+  updateMessage("Launch an attack!");
+  startGame();
+}
+
+restartBtn.addEventListener("click", resetGame);
