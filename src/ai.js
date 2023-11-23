@@ -9,6 +9,8 @@ class AI extends Player {
     super(name, gameboard);
     this.turn = false;
     this.attackArray = [];
+    this.lastHit = null;
+    this.potentialTargets = [];
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -28,20 +30,36 @@ class AI extends Player {
 
     let x;
     let y;
-    do {
-      ({ x, y } = this.getRandomCoordinate());
-    } while (!this.isMoveLegal(x, y));
-    const attackResult = this.attack(x, y, player, playerBoard);
-    console.log("AI attack result:", attackResult, x, y);
 
-    this.recordAttack(x, y);
-    this.endTurn(player);
+    if (this.potentialTargets.length > 0) {
+      ({ x, y } = this.potentialTargets.pop());
+    } else {
+      do {
+        ({ x, y } = this.getRandomCoordinate());
+      } while (!this.isMoveLegal(x, y));
+      console.log("Random attack at:", x, y);
+    }
+
+    const attackResult = this.attack(x, y, player, playerBoard);
+
+    if (attackResult.hit) {
+      // If a ship is hit but not sunk, update potential targets
+      if (!attackResult.sunk) {
+        this.updatePotentialTargets(x, y, playerBoard);
+        // Clear potential targets if a ship is sunk
+      } else {
+        this.potentialTargets = [];
+      }
+      // Clear last hit if the AI missed, indicating no ship in the nearby area
+      this.lastHit = { x, y };
+    } else {
+      this.lastHit = null;
+    }
 
     const gameOver = playerBoard.areAllShipsSunk();
 
     // Update the message based on attack result
     if (gameOver) {
-      // If all ships are sunk, the game is over
       attackResult.message = "Game over! AI won!";
     } else if (attackResult.hit) {
       // If a ship is hit, but not all are sunk
@@ -55,7 +73,26 @@ class AI extends Player {
 
     attackResult.allSunk = gameOver;
 
+    this.recordAttack(x, y);
+    this.endTurn(player);
     return attackResult;
+  }
+
+  updatePotentialTargets(x, y, playerBoard) {
+    this.potentialTargets = [
+      { x: x + 1, y },
+      { x: x - 1, y },
+      { x, y: y + 1 },
+      { x, y: y - 1 },
+    ];
+    console.log("Generated Potential Targets:", this.potentialTargets);
+
+    // Filter out illegal coordinates
+    this.potentialTargets = this.potentialTargets.filter((coord) =>
+      this.isMoveLegal(coord.x, coord.y, playerBoard),
+    );
+
+    console.log("Filtered Potential Targets:", this.potentialTargets);
   }
 
   getAttackArray() {
