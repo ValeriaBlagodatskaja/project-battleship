@@ -15,9 +15,54 @@
         <span class="playerBoard-name">Player's board</span>
         <div id="playerBoard" class="playerBoard"></div>
       </div>
+
       <div class="aiBoard-container">
         <span class="aiBoard-name">AI's board</span>
         <div id="aiBoard" class="aiBoard"></div>
+      </div>
+    </div>
+
+    <button id="directionBtn">Change Direction</button>
+    <div id="ships">
+      <div>Carrier</div>
+      <div
+        id="carrier"
+        class="ship"
+        data-ship-type="carrier"
+        data-ship-length="5"
+      >
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+      </div>
+
+      <div>Battleship</div>
+      <div class="ship" data-ship-type="battleship" data-ship-length="4">
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+      </div>
+
+      <div>Cruiser</div>
+      <div class="ship" data-ship-type="cruiser" data-ship-length="3">
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+      </div>
+
+      <div>Submarine</div>
+      <div class="ship" data-ship-type="submarine" data-ship-length="3">
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
+      </div>
+      <div>Destroyer</div>
+      <div class="ship" data-ship-type="destroyer" data-ship-length="2">
+        <div class="board-cell ship"></div>
+        <div class="board-cell ship"></div>
       </div>
     </div>
     <button id="restartBtn" class="restartBtn" style="display: none">

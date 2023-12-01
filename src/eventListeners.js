@@ -35,6 +35,8 @@ export default function setupEventListeners(playerBoard, aiBoard, player, ai) {
               updateMessage(aiAttackResult.message);
               if (aiAttackResult.allSunk) {
                 updateMessage(aiAttackResult.message);
+                const restartBtn = document.getElementById("restartBtn");
+                restartBtn.style.display = "block";
                 return;
               }
             }
