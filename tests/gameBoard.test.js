@@ -49,9 +49,10 @@ test("Gameboard keeps track of missed attacks", () => {
 
 test("Gameboard can check if every ship is sunk", () => {
   const game = Gameboard();
-  game.placeShip(0, 0, "scout", "horizontal");
+  game.placeShip(0, 0, "destroyer", "horizontal");
   game.placeShip(3, 0, "destroyer", "horizontal");
   game.receiveAttack(0, 0);
+  game.receiveAttack(1, 0);
   game.receiveAttack(3, 0);
   game.receiveAttack(4, 0);
   expect(game.areAllShipsSunk()).toBe(true);

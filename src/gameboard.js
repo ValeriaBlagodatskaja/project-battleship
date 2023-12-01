@@ -36,7 +36,7 @@ const Gameboard = () => {
       let startX = x;
       let startY = y;
 
-      if (direction === "horizontal") {
+      if (direction === "vertical") {
         startX += i;
       } else {
         startY += i;
