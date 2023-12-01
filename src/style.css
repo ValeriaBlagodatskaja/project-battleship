@@ -36,7 +36,6 @@ body {
   width: 40px;
   height: 40px;
   border: 1px solid #333;
-  box-sizing: border-box;
   cursor: pointer;
 }
 
@@ -69,4 +68,12 @@ body {
   color: white;
   font-size: 32px;
   padding: 24px 12px;
+}
+
+.show {
+  display: block;
+}
+
+.highlight {
+  background-color: green;
 }

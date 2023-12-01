@@ -1,22 +1,38 @@
 import Gameboard from "./gameboard";
-import ship from "./ship";
 import Player from "./player";
 import AI from "./ai";
 import "./style.css";
-
 import { renderGameboard, updateMessage } from "./renderGameboard";
-
 import setupEventListeners from "./eventListeners";
+import {
+  selectShip,
+  toggleShipDirection,
+  clearHighlights,
+  handleMouseOver,
+  placeShipOnClick,
+} from "./placingShips";
 
 export default function startGame() {
   const playerBoard = Gameboard();
-  playerBoard.placeShip(0, 2, "destroyer", "vertical");
-  playerBoard.placeShip(5, 5, "carrier", "vertical");
-  playerBoard.placeShip(8, 4, "battleship", "vertical");
-  playerBoard.placeShip(2, 8, "destroyer", "vertical");
+  const playerBoardElement = document.getElementById("playerBoard");
+
+  playerBoardElement.addEventListener("mouseover", handleMouseOver);
+  playerBoardElement.addEventListener("mouseleave", clearHighlights);
+  playerBoardElement.addEventListener("click", (e) =>
+    placeShipOnClick(e, playerBoard),
+  );
+
+  document
+    .getElementById("directionBtn")
+    .addEventListener("click", toggleShipDirection);
+
+  document.querySelectorAll(".ship").forEach((shipChoice) => {
+    shipChoice.addEventListener("click", selectShip);
+  });
+
   const aiBoard = Gameboard();
   aiBoard.placeShip(3, 2, "destroyer", "horizontal");
-  aiBoard.placeShip(9, 7, "destroyer", "vertical");
+  aiBoard.placeShip(7, 7, "destroyer", "vertical");
 
   const player = new Player("Player Name", playerBoard);
   const ai = new AI("AI", aiBoard);

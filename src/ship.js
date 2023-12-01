@@ -5,7 +5,6 @@ export const SHIP_LENGTHS = {
   cruiser: 3,
   submarine: 3,
   destroyer: 2,
-  scout: 1,
 };
 
 const ship = (shipType) => {
