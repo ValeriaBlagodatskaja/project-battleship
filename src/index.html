@@ -8,22 +8,11 @@
   <body>
     <header>Battleship</header>
     <div class="message-container">
-      <span id="message" class="message">Launch an attack!</span>
-    </div>
-    <div class="boards">
-      <div class="playerBoard-container">
-        <span class="playerBoard-name">Player's board</span>
-        <div id="playerBoard" class="playerBoard"></div>
-      </div>
-
-      <div class="aiBoard-container">
-        <span class="aiBoard-name">AI's board</span>
-        <div id="aiBoard" class="aiBoard"></div>
-      </div>
+      <span id="message" class="message">Place your ships</span>
     </div>
 
-    <button id="directionBtn">Change Direction</button>
-    <div id="ships">
+    <button id="directionBtn" style="display: block">Change Direction</button>
+    <div id="ships" style="display: block">
       <div>Carrier</div>
       <div
         id="carrier"
@@ -65,6 +54,24 @@
         <div class="board-cell ship"></div>
       </div>
     </div>
+
+    <div class="boards">
+      <div class="playerBoard-container">
+        <span class="playerBoard-name">Player's board</span>
+        <div id="playerBoard" class="playerBoard"></div>
+      </div>
+
+      <div
+        id="aiBoard-container"
+        class="aiBoard-container"
+        style="display: none"
+      >
+        <span class="aiBoard-name">AI's board</span>
+        <div id="aiBoard" class="aiBoard"></div>
+      </div>
+    </div>
+
+    <button id="startGameBtn" style="display: none">Start Game</button>
     <button id="restartBtn" class="restartBtn" style="display: none">
       Play again
     </button>

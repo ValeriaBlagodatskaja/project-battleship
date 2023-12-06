@@ -47,6 +47,8 @@ export function handleMouseOver(event) {
   if (!selectedShip) return;
 
   const cell = event.target;
+  if (!cell.classList.contains("board-cell")) return;
+
   const shipLength = SHIP_LENGTHS[selectedShip];
   const row = parseInt(cell.getAttribute("data-row"), 10);
   const column = parseInt(cell.getAttribute("data-column"), 10);
@@ -70,6 +72,8 @@ export function placeShipOnClick(event, playerBoard) {
   if (!selectedShip) return;
 
   const cell = event.target;
+  if (!cell.classList.contains("board-cell")) return;
+
   const row = parseInt(cell.getAttribute("data-row"), 10);
   const column = parseInt(cell.getAttribute("data-column"), 10);
 
@@ -84,16 +88,73 @@ export function placeShipOnClick(event, playerBoard) {
     maxRow = Math.min(row + shipLength, 10);
   }
 
+  if (placedShips.has(selectedShip)) {
+    updateMessage(`${selectedShip} is already placed`);
+    clearHighlights();
+    return;
+  }
+
+  if (maxColumn > 9 || maxRow > 9) {
+    updateMessage("Ship doesn't fit on board");
+    clearHighlights();
+    return;
+  }
+
+  if (!playerBoard.canPlaceShip(row, column, selectedShip, currentDirection)) {
+    updateMessage("Cannot place ship here");
+    clearHighlights();
+    return;
+  }
+
   try {
-    if (maxColumn > 9 || maxRow > 9) return;
     playerBoard.placeShip(row, column, selectedShip, currentDirection);
     placedShips.add(selectedShip);
     renderGameboard(playerBoard, "playerBoard");
+
+    if (placedShips.size === Object.keys(SHIP_LENGTHS).length) {
+      document.getElementById("startGameBtn").style.display = "block";
+    }
+    selectedShip = null;
+    clearHighlights();
   } catch (error) {
     console.log(error);
-    updateMessage("There is already a ship at that location.");
+    updateMessage(error.message);
   } finally {
     selectedShip = null;
     clearHighlights();
   }
+}
+
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
+export function placeAIShips(aiBoard, shipLengths) {
+  const placedAIShips = [];
+
+  Object.keys(shipLengths).forEach((shipType) => {
+    let placed = false;
+    while (!placed) {
+      const direction = Math.random() > 0.5 ? "horizontal" : "vertical";
+      const shipLength = shipLengths[shipType];
+
+      const maxX = direction === "vertical" ? 10 - shipLength : 10;
+      const maxY = direction === "horizontal" ? 10 - shipLength : 10;
+
+      const x = getRandomInt(0, maxX);
+      const y = getRandomInt(0, maxY);
+      console.log(aiBoard.canPlaceShip(x, y, shipType, direction));
+      if (!aiBoard.canPlaceShip(x, y, shipType, direction)) {
+        console.log("Cannot place ship here", x, y, shipType, direction);
+        placed = false;
+        continue;
+      } else {
+        const shipInfo = aiBoard.placeShip(x, y, shipType, direction);
+        placedAIShips.push(shipInfo);
+        placed = true;
+      }
+    }
+  });
+  console.log(placedAIShips);
+  return placedAIShips;
 }

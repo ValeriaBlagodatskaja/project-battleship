@@ -2,6 +2,7 @@ import Gameboard from "./gameboard";
 import Player from "./player";
 import AI from "./ai";
 import "./style.css";
+import { SHIP_LENGTHS } from "./ship";
 import { renderGameboard, updateMessage } from "./renderGameboard";
 import setupEventListeners from "./eventListeners";
 import {
@@ -10,6 +11,7 @@ import {
   clearHighlights,
   handleMouseOver,
   placeShipOnClick,
+  placeAIShips,
 } from "./placingShips";
 
 export default function startGame() {
@@ -26,30 +28,45 @@ export default function startGame() {
     .getElementById("directionBtn")
     .addEventListener("click", toggleShipDirection);
 
-  document.querySelectorAll(".ship").forEach((shipChoice) => {
-    shipChoice.addEventListener("click", selectShip);
+  document.querySelectorAll(".ship").forEach((shipElement) => {
+    shipElement.addEventListener("click", selectShip);
   });
 
-  const aiBoard = Gameboard();
-  aiBoard.placeShip(3, 2, "destroyer", "horizontal");
-  aiBoard.placeShip(7, 7, "destroyer", "vertical");
+  // renderGameboard(playerBoard, "playerBoard");
 
-  const player = new Player("Player Name", playerBoard);
-  const ai = new AI("AI", aiBoard);
+  function initializeAIBoard() {
+    const aiBoard = Gameboard();
+    placeAIShips(aiBoard, SHIP_LENGTHS);
 
-  // Render the initial state of the gameboard
-  renderGameboard(playerBoard, "playerBoard");
-  renderGameboard(aiBoard, "aiBoard");
+    const aiBoardElement = document.getElementById("aiBoard-container");
+    aiBoardElement.style.display = "block";
 
-  // Setup event listeners for the gameboard
-  setupEventListeners(playerBoard, aiBoard, player, ai);
+    updateMessage("Launch an attack!");
+    renderGameboard(aiBoard, "aiBoard");
+    const player = new Player("Player Name", playerBoard);
+    const ai = new AI("AI", aiBoard);
+    setupEventListeners(playerBoard, aiBoard, player, ai);
+  }
+  initializeAIBoard();
+
+  document.getElementById("startGameBtn").addEventListener("click", () => {
+    initializeAIBoard();
+    document.getElementById("startGameBtn").style.display = "none";
+    document.getElementById("directionBtn").style.display = "none";
+    document.getElementById("ships").style.display = "none";
+  });
 }
 
 const restartBtn = document.getElementById("restartBtn");
 
 export function resetGame() {
   restartBtn.style.display = "none";
-  updateMessage("Launch an attack!");
+  updateMessage("Place your ships");
+  document.getElementById("startGameBtn").style.display = "block";
+  document.getElementById("directionBtn").style.display = "block";
+  document.getElementById("ships").style.display = "block";
+  const aiBoardElement = document.getElementById("aiBoard-container");
+  aiBoardElement.style.display = "none";
   startGame();
 }
 

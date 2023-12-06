@@ -3,7 +3,7 @@ import ship, { SHIP_LENGTHS } from "./ship";
 const Gameboard = () => {
   const board = [];
   const ships = [];
-  const BOARD_SIZE = 10;
+  const BOARD_SIZE = 9;
 
   const shots = {
     hits: [],
@@ -41,6 +41,7 @@ const Gameboard = () => {
       } else {
         startY += i;
       }
+
       if (startX >= BOARD_SIZE || startY >= BOARD_SIZE) {
         throw new Error(
           "Ship placement is outside of the gameboard boundaries.",
@@ -54,6 +55,31 @@ const Gameboard = () => {
       // Assign the ship to the board cell
       board[startX][startY] = newShip;
     }
+  };
+
+  const canPlaceShip = (x, y, shipType, direction) => {
+    const shipLength = SHIP_LENGTHS[shipType];
+
+    for (let i = 0; i < shipLength; i++) {
+      let checkX = x;
+      let checkY = y;
+
+      if (direction === "vertical") {
+        checkX += i;
+      } else {
+        checkY += i;
+      }
+
+      if (
+        checkX >= BOARD_SIZE ||
+        checkY >= BOARD_SIZE ||
+        board[checkX][checkY]
+      ) {
+        return false;
+      }
+    }
+
+    return true;
   };
 
   const getShipAt = (x, y) => {
@@ -87,6 +113,7 @@ const Gameboard = () => {
 
   return {
     placeShip,
+    canPlaceShip,
     getShipAt,
     receiveAttack,
     areAllShipsSunk,
