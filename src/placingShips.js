@@ -94,7 +94,7 @@ export function placeShipOnClick(event, playerBoard) {
     return;
   }
 
-  if (maxColumn > 9 || maxRow > 9) {
+  if (maxColumn > 10 || maxRow > 10) {
     updateMessage("Ship doesn't fit on board");
     clearHighlights();
     return;
@@ -138,8 +138,8 @@ export function placeAIShips(aiBoard, shipLengths) {
       const direction = Math.random() > 0.5 ? "horizontal" : "vertical";
       const shipLength = shipLengths[shipType];
 
-      const maxX = direction === "vertical" ? 10 - shipLength : 10;
-      const maxY = direction === "horizontal" ? 10 - shipLength : 10;
+      const maxX = direction === "vertical" ? 9 - shipLength : 9;
+      const maxY = direction === "horizontal" ? 9 - shipLength : 9;
 
       const x = getRandomInt(0, maxX);
       const y = getRandomInt(0, maxY);

@@ -74,7 +74,7 @@ class Player {
   }
 
   isMoveLegal(x, y) {
-    const withinBounds = x >= 0 && y >= 0 && x < 10 && y < 10;
+    const withinBounds = x >= 0 && y >= 0 && x <= 9 && y <= 9;
     const notPreviouslyAttacked = !this.moves.some(
       (move) => move.x === x && move.y === y,
     );

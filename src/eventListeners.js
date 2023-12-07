@@ -1,9 +1,9 @@
 import { renderGameboard, updateMessage } from "./renderGameboard";
 
 export default function setupEventListeners(playerBoard, aiBoard, player, ai) {
-  const aiBoardContainer = document.getElementById("aiBoard");
+  const aiBoardElement = document.getElementById("aiBoard");
 
-  aiBoardContainer.addEventListener("click", (event) => {
+  aiBoardElement.addEventListener("click", (event) => {
     const cell = event.target;
     if (cell.classList.contains("board-cell")) {
       // Get the row and column from the cell's data attributes

@@ -3,7 +3,7 @@ import ship, { SHIP_LENGTHS } from "./ship";
 const Gameboard = () => {
   const board = [];
   const ships = [];
-  const BOARD_SIZE = 9;
+  const BOARD_SIZE = 10;
 
   const shots = {
     hits: [],

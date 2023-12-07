@@ -26,7 +26,13 @@ class AI extends Player {
   }
 
   randomAttack(player, playerBoard) {
-    if (!this.turn) return;
+    if (!this.turn)
+      return {
+        success: false,
+        hit: false,
+        sunk: false,
+        message: "",
+      };
 
     let x;
     let y;

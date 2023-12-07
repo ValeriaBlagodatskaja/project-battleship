@@ -32,7 +32,7 @@ export default function startGame() {
     shipElement.addEventListener("click", selectShip);
   });
 
-  // renderGameboard(playerBoard, "playerBoard");
+  renderGameboard(playerBoard, "playerBoard");
 
   function initializeAIBoard() {
     const aiBoard = Gameboard();
@@ -47,7 +47,6 @@ export default function startGame() {
     const ai = new AI("AI", aiBoard);
     setupEventListeners(playerBoard, aiBoard, player, ai);
   }
-  initializeAIBoard();
 
   document.getElementById("startGameBtn").addEventListener("click", () => {
     initializeAIBoard();
@@ -60,14 +59,8 @@ export default function startGame() {
 const restartBtn = document.getElementById("restartBtn");
 
 export function resetGame() {
-  restartBtn.style.display = "none";
-  updateMessage("Place your ships");
-  document.getElementById("startGameBtn").style.display = "block";
-  document.getElementById("directionBtn").style.display = "block";
-  document.getElementById("ships").style.display = "block";
-  const aiBoardElement = document.getElementById("aiBoard-container");
-  aiBoardElement.style.display = "none";
-  startGame();
+  // eslint-disable-next-line no-restricted-globals
+  location.reload();
 }
 
 restartBtn.addEventListener("click", resetGame);
