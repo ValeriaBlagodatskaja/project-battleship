@@ -4,74 +4,91 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Battleship</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Anton&family=Poppins:wght@100&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Anton&family=Dhurjati&family=Play&family=Poppins:wght@100&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <header>Battleship</header>
+    <header class="battleship">BATTLESHIP</header>
     <div class="message-container">
       <span id="message" class="message">Place your ships</span>
     </div>
 
-    <button id="directionBtn" style="display: block">Change Direction</button>
-    <div id="ships" style="display: block">
-      <div>Carrier</div>
-      <div
-        id="carrier"
-        class="ship"
-        data-ship-type="carrier"
-        data-ship-length="5"
-      >
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
+    <div class="placing-container">
+      <div class="ships" id="ships" style="display: block">
+        <div class="shipName">Carrier</div>
+        <div
+          id="carrier"
+          class="ship"
+          data-ship-type="carrier"
+          data-ship-length="5"
+        >
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+        </div>
+
+        <div class="shipName">Battleship</div>
+        <div class="ship" data-ship-type="battleship" data-ship-length="4">
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+        </div>
+
+        <div class="shipName">Cruiser</div>
+        <div class="ship" data-ship-type="cruiser" data-ship-length="3">
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+        </div>
+
+        <div class="shipName">Submarine</div>
+        <div class="ship" data-ship-type="submarine" data-ship-length="3">
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+        </div>
+        <div class="shipName">Destroyer</div>
+        <div class="ship" data-ship-type="destroyer" data-ship-length="2">
+          <div class="board-cell ship"></div>
+          <div class="board-cell ship"></div>
+        </div>
       </div>
 
-      <div>Battleship</div>
-      <div class="ship" data-ship-type="battleship" data-ship-length="4">
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-      </div>
-
-      <div>Cruiser</div>
-      <div class="ship" data-ship-type="cruiser" data-ship-length="3">
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-      </div>
-
-      <div>Submarine</div>
-      <div class="ship" data-ship-type="submarine" data-ship-length="3">
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
-      </div>
-      <div>Destroyer</div>
-      <div class="ship" data-ship-type="destroyer" data-ship-length="2">
-        <div class="board-cell ship"></div>
-        <div class="board-cell ship"></div>
+      <div class="boards">
+        <div class="playerBoard-container">
+          <span class="playerBoard-name">Player's board</span>
+          <div id="playerBoard" class="playerBoard"></div>
+          <button class="directionBtn" id="directionBtn" style="display: block">
+            Change Direction
+          </button>
+          <button class="startGameBtn" id="startGameBtn" style="display: none">
+            Start Game
+          </button>
+        </div>
+        <div
+          id="aiBoard-container"
+          class="aiBoard-container"
+          style="display: none"
+        >
+          <span class="aiBoard-name">AI's board</span>
+          <div id="aiBoard" class="aiBoard"></div>
+        </div>
       </div>
     </div>
 
-    <div class="boards">
-      <div class="playerBoard-container">
-        <span class="playerBoard-name">Player's board</span>
-        <div id="playerBoard" class="playerBoard"></div>
-      </div>
-
-      <div
-        id="aiBoard-container"
-        class="aiBoard-container"
-        style="display: none"
-      >
-        <span class="aiBoard-name">AI's board</span>
-        <div id="aiBoard" class="aiBoard"></div>
-      </div>
-    </div>
-
-    <button id="startGameBtn" style="display: none">Start Game</button>
     <button id="restartBtn" class="restartBtn" style="display: none">
       Play again
     </button>

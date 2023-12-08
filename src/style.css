@@ -1,27 +1,49 @@
 * {
   box-sizing: border-box;
 }
-
+html,
 body {
-  max-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-image: linear-gradient(#1d4350, #a43931);
+  background-attachment: fixed;
 }
 
+body {
+  min-height: 100vh;
+}
+
+.battleship {
+  font-family: Anton, sans-serif;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+}
 .boards {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 100px;
-  margin: 20px;
+  margin: 10px auto;
 }
 
 .playerBoard-container,
 .aiBoard-container {
   text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
+.playerBoard,
+.aiBoard {
+  border: 8px solid rgba(0, 0, 0, 0.6);
+  background-image: linear-gradient(to right, #141e30, #243b55);
+}
 .playerBoard-name,
 .aiBoard-name {
   font-size: 28px;
+  font-family: Play, sans-serif;
 }
 
 .board-row {
@@ -30,33 +52,45 @@ body {
 }
 
 .board-cell {
-  background-color: blue;
-
-  width: 40px;
-  height: 40px;
-  border: 1px solid #333;
+  width: 60px;
+  height: 60px;
+  border: 1px solid rgba(44, 195, 255, 0.7254901960784313);
   cursor: pointer;
 }
 
-/* Cell when it has a ship */
 .board-cell.ship {
-  background-color: green;
+  background-color: #8a8888;
 }
 
-/* Cell when it is hit */
 .board-cell.hit {
-  background-color: red;
+  background-color: #a61123;
 }
 
-/* Cell when attack misses */
 .board-cell.miss {
-  background-color: grey;
+  background-color: rgba(158, 245, 170, 0.28);
+}
+
+.placing-container {
+  display: flex;
+  gap: 20px;
+}
+
+.directionBtn {
+  margin-top: 20px;
+  color: white;
+  background: black;
+  border: 4px solid rgb(212 212 216);
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: Play, sans-serif;
 }
 
 .message-container {
   background-color: black;
   width: 90%;
-  border: 2px solid black;
+  border: 8px solid rgb(212 212 216);
+
   margin: 20px auto;
   display: flex;
   align-items: center;
@@ -67,6 +101,7 @@ body {
   color: white;
   font-size: 32px;
   padding: 24px 12px;
+  font-family: Play, sans-serif;
 }
 
 .show {
@@ -74,9 +109,41 @@ body {
 }
 
 .highlight {
-  background-color: green;
+  background-color: #90ffdc;
 }
 
 .ship {
   display: flex;
+}
+
+.ships {
+  margin-top: 100px;
+  margin-left: 100px;
+}
+.shipName {
+  font-family: Anton, sans-serif;
+  font-size: 22px;
+}
+
+.startGameBtn {
+  color: white;
+  background-image: linear-gradient(to right, #870000, #190a05);
+  border: 4px solid rgb(212 212 216);
+  padding: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: Play, sans-serif;
+  margin-top: 20px;
+}
+
+.restartBtn {
+  color: white;
+  background-image: linear-gradient(to right, #2c3e50, #4ca1af);
+  border: 4px solid rgb(212 212 216);
+  padding: 24px;
+  font-size: 32px;
+  cursor: pointer;
+  font-family: Play, sans-serif;
+  margin: 10px auto;
+  margin-top: 40px;
 }
