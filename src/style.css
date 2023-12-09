@@ -40,10 +40,11 @@ body {
   border: 8px solid rgba(0, 0, 0, 0.6);
   background-image: linear-gradient(to right, #141e30, #243b55);
 }
-.playerBoard-name,
-.aiBoard-name {
+.board-name {
   font-size: 28px;
   font-family: Play, sans-serif;
+  margin-bottom: 10px;
+  display: block;
 }
 
 .board-row {
@@ -59,7 +60,7 @@ body {
 }
 
 .board-cell.ship {
-  background-color: #8a8888;
+  background-color: #90ffdc;
 }
 
 .board-cell.hit {
@@ -117,12 +118,35 @@ body {
 }
 
 .ships {
-  margin-top: 100px;
+  margin-top: 70px;
   margin-left: 100px;
 }
 .shipName {
   font-family: Anton, sans-serif;
   font-size: 22px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.battleship {
+  width: 240px;
+  height: 60px;
+}
+
+.carrier {
+  width: 300px;
+  height: 60px;
+}
+
+.cruiser,
+.submarine {
+  width: 160px;
+  height: 60px;
+}
+
+.destroyer {
+  width: 120px;
+  height: 60px;
 }
 
 .startGameBtn {
@@ -140,7 +164,7 @@ body {
   color: white;
   background-image: linear-gradient(to right, #2c3e50, #4ca1af);
   border: 4px solid rgb(212 212 216);
-  padding: 24px;
+  padding: 18px;
   font-size: 32px;
   cursor: pointer;
   font-family: Play, sans-serif;

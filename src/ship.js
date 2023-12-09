@@ -1,4 +1,3 @@
-// length object
 export const SHIP_LENGTHS = {
   carrier: 5,
   battleship: 4,
@@ -14,16 +13,13 @@ const ship = (shipType) => {
 
   let hits = 0;
 
-  // hit
   const hit = () => {
     if (hits < length) {
-      // You can hit a ship only if it hasn't been sunk
       hits++;
     }
   };
 
   const getHitNum = () => hits;
-  // isSunk
   const isSunk = () => {
     if (hits >= length) {
       return true;

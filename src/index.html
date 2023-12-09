@@ -22,54 +22,41 @@
     <div class="message-container">
       <span id="message" class="message">Place your ships</span>
     </div>
-
     <div class="placing-container">
       <div class="ships" id="ships" style="display: block">
-        <div class="shipName">Carrier</div>
+        <div class="shipName">CARRIER</div>
         <div
           id="carrier"
           class="ship"
           data-ship-type="carrier"
           data-ship-length="5"
         >
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
+          <img class="carrier" src="./images/carrier.png" />
         </div>
 
-        <div class="shipName">Battleship</div>
+        <div class="shipName">BATTLESHIP</div>
         <div class="ship" data-ship-type="battleship" data-ship-length="4">
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
+          <img class="battleship" src="./images/battleship.png" />
         </div>
 
-        <div class="shipName">Cruiser</div>
+        <div class="shipName">CRUISER</div>
         <div class="ship" data-ship-type="cruiser" data-ship-length="3">
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
+          <img class="cruiser" src="./images/cruiser.png" />
         </div>
 
-        <div class="shipName">Submarine</div>
+        <div class="shipName">SUBRMARINE</div>
         <div class="ship" data-ship-type="submarine" data-ship-length="3">
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
+          <img class="submarine" src="./images/submarine.png" />
         </div>
-        <div class="shipName">Destroyer</div>
+        <div class="shipName">DESTROYER</div>
         <div class="ship" data-ship-type="destroyer" data-ship-length="2">
-          <div class="board-cell ship"></div>
-          <div class="board-cell ship"></div>
+          <img class="destroyer" src="./images/destroyer.png" />
         </div>
       </div>
 
       <div class="boards">
         <div class="playerBoard-container">
-          <span class="playerBoard-name">Player's board</span>
+          <span class="board-name">Player's board</span>
           <div id="playerBoard" class="playerBoard"></div>
           <button class="directionBtn" id="directionBtn" style="display: block">
             Change Direction
@@ -83,7 +70,7 @@
           class="aiBoard-container"
           style="display: none"
         >
-          <span class="aiBoard-name">AI's board</span>
+          <span class="board-name">AI's board</span>
           <div id="aiBoard" class="aiBoard"></div>
         </div>
       </div>
