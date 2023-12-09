@@ -6,10 +6,8 @@ export default function setupEventListeners(playerBoard, aiBoard, player, ai) {
   aiBoardElement.addEventListener("click", (event) => {
     const cell = event.target;
     if (cell.classList.contains("board-cell")) {
-      // Get the row and column from the cell's data attributes
       const row = parseInt(cell.getAttribute("data-row"), 10);
       const column = parseInt(cell.getAttribute("data-column"), 10);
-      // Perform an attack or other game logic based on the clicked cell
       const attackResult = player.attack(row, column, ai, aiBoard);
 
       if (attackResult.success) {

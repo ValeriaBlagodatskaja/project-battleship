@@ -7,10 +7,8 @@ export function renderGameboard(gameboard, boardContainerId) {
   const { hits, misses } = shots;
   const boardContainer = document.getElementById(boardContainerId);
 
-  // Clear previous content
   boardContainer.innerHTML = "";
 
-  // Create and append rows and cells
   boardData.forEach((row, rowIndex) => {
     const rowDiv = document.createElement("div");
     rowDiv.className = "board-row";
@@ -19,10 +17,14 @@ export function renderGameboard(gameboard, boardContainerId) {
       const cellDiv = document.createElement("div");
       cellDiv.className = "board-cell";
 
-      if (cell && typeof cell === "object" && cell.id) {
+      if (
+        cell &&
+        typeof cell === "object" &&
+        cell.id &&
+        boardContainerId !== "aiBoard"
+      ) {
         cellDiv.classList.add("ship");
       }
-      // Set attributes for identification
       hits.forEach(({ x, y }) => {
         if (x === rowIndex && y === cellIndex) {
           cellDiv.classList.add("hit");

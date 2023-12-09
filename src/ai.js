@@ -49,14 +49,11 @@ class AI extends Player {
     const attackResult = this.attack(x, y, player, playerBoard);
 
     if (attackResult.hit) {
-      // If a ship is hit but not sunk, update potential targets
       if (!attackResult.sunk) {
         this.updatePotentialTargets(x, y, playerBoard);
-        // Clear potential targets if a ship is sunk
       } else {
         this.potentialTargets = [];
       }
-      // Clear last hit if the AI missed, indicating no ship in the nearby area
       this.lastHit = { x, y };
     } else {
       this.lastHit = null;
@@ -64,16 +61,13 @@ class AI extends Player {
 
     const gameOver = playerBoard.areAllShipsSunk();
 
-    // Update the message based on attack result
     if (gameOver) {
       attackResult.message = "Game over! AI won!";
     } else if (attackResult.hit) {
-      // If a ship is hit, but not all are sunk
       attackResult.message = attackResult.sunk
         ? "AI sunk your ship!"
         : "AI hit your ship!";
     } else {
-      // If the attack missed
       attackResult.message = "AI missed!";
     }
 
@@ -91,14 +85,10 @@ class AI extends Player {
       { x, y: y + 1 },
       { x, y: y - 1 },
     ];
-    console.log("Generated Potential Targets:", this.potentialTargets);
 
-    // Filter out illegal coordinates
     this.potentialTargets = this.potentialTargets.filter((coord) =>
       this.isMoveLegal(coord.x, coord.y, playerBoard),
     );
-
-    console.log("Filtered Potential Targets:", this.potentialTargets);
   }
 
   getAttackArray() {

@@ -9,7 +9,7 @@ const Gameboard = () => {
     hits: [],
     misses: [],
   };
-  // Initialize the gameboard as a grid of null values
+
   const createBoard = () => {
     for (let i = 0; i < BOARD_SIZE; i++) {
       board[i] = [];
@@ -24,14 +24,12 @@ const Gameboard = () => {
     return board.map((row) => [...row]);
   };
 
-  // Place a ship on the gameboard
   const placeShip = (x, y, shipType, direction) => {
     const shipLength = SHIP_LENGTHS[shipType];
 
     const newShip = ship(shipType);
     ships.push(newShip);
 
-    // Calculate the coordinates for the ship based on its length and direction
     for (let i = 0; i < shipLength; i++) {
       let startX = x;
       let startY = y;
@@ -52,7 +50,6 @@ const Gameboard = () => {
         throw new Error("There is already a ship at that location.");
       }
 
-      // Assign the ship to the board cell
       board[startX][startY] = newShip;
     }
   };
@@ -94,7 +91,6 @@ const Gameboard = () => {
     if (target) {
       target.hit();
 
-      // Record the hit
       shots.hits.push({ x, y });
       if (target.isSunk()) {
         return { hit: true, sunk: true };

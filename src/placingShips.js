@@ -112,6 +112,7 @@ export function placeShipOnClick(event, playerBoard) {
     renderGameboard(playerBoard, "playerBoard");
 
     if (placedShips.size === Object.keys(SHIP_LENGTHS).length) {
+      document.getElementById("directionBtn").style.display = "none";
       document.getElementById("startGameBtn").style.display = "block";
     }
     selectedShip = null;
@@ -143,18 +144,17 @@ export function placeAIShips(aiBoard, shipLengths) {
 
       const x = getRandomInt(0, maxX);
       const y = getRandomInt(0, maxY);
-      console.log(aiBoard.canPlaceShip(x, y, shipType, direction));
+
       if (!aiBoard.canPlaceShip(x, y, shipType, direction)) {
-        console.log("Cannot place ship here", x, y, shipType, direction);
         placed = false;
         continue;
       } else {
         const shipInfo = aiBoard.placeShip(x, y, shipType, direction);
+
         placedAIShips.push(shipInfo);
         placed = true;
       }
     }
   });
-  console.log(placedAIShips);
   return placedAIShips;
 }

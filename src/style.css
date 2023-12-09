@@ -14,7 +14,7 @@ body {
   min-height: 100vh;
 }
 
-.battleship {
+.battleship-header {
   font-family: Anton, sans-serif;
   font-size: 60px;
   display: flex;
@@ -131,22 +131,26 @@ body {
 .battleship {
   width: 240px;
   height: 60px;
+  cursor: pointer;
 }
 
 .carrier {
   width: 300px;
   height: 60px;
+  cursor: pointer;
 }
 
 .cruiser,
 .submarine {
   width: 160px;
   height: 60px;
+  cursor: pointer;
 }
 
 .destroyer {
   width: 120px;
   height: 60px;
+  cursor: pointer;
 }
 
 .startGameBtn {
