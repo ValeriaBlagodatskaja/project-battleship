@@ -43,7 +43,6 @@ class AI extends Player {
       do {
         ({ x, y } = this.getRandomCoordinate());
       } while (!this.isMoveLegal(x, y));
-      console.log("Random attack at:", x, y);
     }
 
     const attackResult = this.attack(x, y, player, playerBoard);

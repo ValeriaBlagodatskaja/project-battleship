@@ -16,68 +16,91 @@
       href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Anton&family=Dhurjati&family=Play&family=Poppins:wght@100&family=Roboto:ital,wght@0,100;0,300;0,500;0,700;1,300;1,400&display=swap"
       rel="stylesheet"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
   </head>
   <body>
-    <header class="battleship-header">BATTLESHIP</header>
-    <div class="message-container">
-      <span id="message" class="message">Place your ships</span>
-    </div>
-    <div class="placing-container">
-      <div class="ships" id="ships" style="display: block">
-        <div class="shipName">CARRIER</div>
-        <div
-          id="carrier"
-          class="ship"
-          data-ship-type="carrier"
-          data-ship-length="5"
-        >
-          <img class="carrier" src="./images/carrier.png" />
+    <div class="container">
+      <header class="battleship-header">BATTLESHIP</header>
+      <div class="message-container">
+        <span id="message" class="message">Place your ships</span>
+      </div>
+      <div class="placing-container">
+        <div class="ships" id="ships" style="display: block">
+          <div class="shipName">CARRIER</div>
+          <div
+            id="carrier"
+            class="ship"
+            data-ship-type="carrier"
+            data-ship-length="5"
+          >
+            <img class="carrier" src="./images/carrier.png" alt="Carrier" />
+          </div>
+
+          <div class="shipName">BATTLESHIP</div>
+          <div class="ship" data-ship-type="battleship" data-ship-length="4">
+            <img
+              class="battleship"
+              src="./images/battleship.png"
+              alt="Battleship"
+            />
+          </div>
+
+          <div class="shipName">CRUISER</div>
+          <div class="ship" data-ship-type="cruiser" data-ship-length="3">
+            <img class="cruiser" src="./images/cruiser.png" alt="Cruiser" />
+          </div>
+
+          <div class="shipName">SUBRMARINE</div>
+          <div class="ship" data-ship-type="submarine" data-ship-length="3">
+            <img
+              class="submarine"
+              src="./images/submarine.png"
+              alt="Submarine"
+            />
+          </div>
+          <div class="shipName">DESTROYER</div>
+          <div class="ship" data-ship-type="destroyer" data-ship-length="2">
+            <img
+              class="destroyer"
+              src="./images/destroyer.png"
+              alt="Destroyer"
+            />
+          </div>
         </div>
 
-        <div class="shipName">BATTLESHIP</div>
-        <div class="ship" data-ship-type="battleship" data-ship-length="4">
-          <img class="battleship" src="./images/battleship.png" />
-        </div>
-
-        <div class="shipName">CRUISER</div>
-        <div class="ship" data-ship-type="cruiser" data-ship-length="3">
-          <img class="cruiser" src="./images/cruiser.png" />
-        </div>
-
-        <div class="shipName">SUBRMARINE</div>
-        <div class="ship" data-ship-type="submarine" data-ship-length="3">
-          <img class="submarine" src="./images/submarine.png" />
-        </div>
-        <div class="shipName">DESTROYER</div>
-        <div class="ship" data-ship-type="destroyer" data-ship-length="2">
-          <img class="destroyer" src="./images/destroyer.png" />
+        <div class="boards">
+          <div class="playerBoard-container">
+            <span class="board-name">Player's board</span>
+            <div id="playerBoard" class="playerBoard"></div>
+            <button
+              class="directionBtn"
+              id="directionBtn"
+              style="display: block"
+            >
+              Change Direction
+            </button>
+            <button
+              class="startGameBtn"
+              id="startGameBtn"
+              style="display: none"
+            >
+              Start Game
+            </button>
+          </div>
+          <div
+            id="aiBoard-container"
+            class="aiBoard-container"
+            style="display: none"
+          >
+            <span class="board-name">AI's board</span>
+            <div id="aiBoard" class="aiBoard"></div>
+          </div>
         </div>
       </div>
 
-      <div class="boards">
-        <div class="playerBoard-container">
-          <span class="board-name">Player's board</span>
-          <div id="playerBoard" class="playerBoard"></div>
-          <button class="directionBtn" id="directionBtn" style="display: block">
-            Change Direction
-          </button>
-          <button class="startGameBtn" id="startGameBtn" style="display: none">
-            Start Game
-          </button>
-        </div>
-        <div
-          id="aiBoard-container"
-          class="aiBoard-container"
-          style="display: none"
-        >
-          <span class="board-name">AI's board</span>
-          <div id="aiBoard" class="aiBoard"></div>
-        </div>
-      </div>
+      <button id="restartBtn" class="restartBtn" style="display: none">
+        Play again
+      </button>
     </div>
-
-    <button id="restartBtn" class="restartBtn" style="display: none">
-      Play again
-    </button>
   </body>
 </html>
